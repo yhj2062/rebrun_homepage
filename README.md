@@ -40,6 +40,24 @@
 <p>🔗 <a href="https://yhj2062.github.io" target="_blank">https://yhj2062.github.io</a></p>
 
 <hr/>
+<h3>✅ 6. 수정사항 반영 시 순서</h3>
+
+<ol>
+  <li>로컬에서 파일 수정 (예: <code>public/portfolio_data.json</code> 또는 이미지 추가)</li>
+  <li>수정한 내용을 git에 반영:
+    <pre><code>
+git add .
+git commit -m "포트폴리오 사진 및 데이터 업데이트"
+git push
+    </code></pre>
+  </li>
+  <li>배포 실행:
+    <pre><code>npm run deploy</code></pre>
+  </li>
+</ol>
+
+<p>이제 GitHub Pages에 변경사항이 반영됩니다 🎉</p>
+
 
 <h3>🛠 참고 사항</h3>
 
@@ -48,3 +66,4 @@
   <li>GitHub 설정에서 <code>gh-pages</code> 브랜치가 생성되었는지, Pages 설정이 해당 브랜치를 바라보는지 확인하세요.</li>
   <li><code>public/</code> 폴더 안에 정적 리소스를 넣어야 GitHub Pages에서 정상 표시됩니다.</li>
 </ul>
+

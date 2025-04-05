@@ -144,7 +144,7 @@ function App() {
 
 
       {/* 네비게이터 아래 전체 배경 영역 */}
-      <Box sx={{ mt: 16, bgcolor: "#121212" }}>
+      <Box sx={{ mt: { xs: 8, md: 16 }, bgcolor: "#121212" }}>
         <Routes>
           <Route index element={<Home />} />
           <Route path="/" element={<Home />} />
