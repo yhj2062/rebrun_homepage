@@ -77,7 +77,7 @@ import {
                   <CardActionArea component={Link} to={`/portfolio/${encodeURIComponent(item.id)}`}>
                     <CardMedia
                       component="img"
-                      image={`/${item.thumb}`}
+                      image={`${item.thumb}`}
                       alt={item.title}
                       sx={{
                         width: "100%",
