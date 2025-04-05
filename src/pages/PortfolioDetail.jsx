@@ -16,16 +16,15 @@ import {
     const [images, setImages] = useState([]);
   
     useEffect(() => {
-        fetch("/portfolio_data.json")
-          .then(res => res.json())
-          .then(data => {
-            const portfolio = data.find(p => p.id === id);
-            if (portfolio) {
-              const folderPath = `/portfolio/${portfolio.folder}/`;
-              setImages(portfolio.images.map(filename => folderPath + filename));
-            }
-          });
-      }, [id]);
+      fetch(`${import.meta.env.BASE_URL}portfolio/portfolio_data.json`)
+        .then(res => res.json())
+        .then(data => {
+          setPortfolioList(data);
+          if (data.length > 0) {
+            setSelectedPlace(data[0].place);
+          }
+        });
+    }, []);
   
     return (
       <Box sx={{ bgcolor: "#121212", minHeight: "100dvh", py: 4 }}>
