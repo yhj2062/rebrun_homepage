@@ -9,7 +9,7 @@ const portfolioDir = path.join(__dirname, '../public/portfolio');
 const outputFile = path.join(__dirname, '../public/portfolio/portfolio_data.json');
 
 // Vite의 base 경로
-const baseUrl = 'https://yhj2062.github.io/rebrun_homepage/';
+const baseUrl = '/rebrun_homepage/';
 
 const portfolioList = [];
 
