@@ -18,7 +18,7 @@ import {
     const [selectedPlace, setSelectedPlace] = useState("");
   
     useEffect(() => {
-      fetch("/portfolio_data.json")
+      fetch(`${import.meta.env.BASE_URL}portfolio/portfolio_data.json`) // ✅ 수정된 경로
         .then(res => res.json())
         .then(data => {
           setPortfolioList(data);

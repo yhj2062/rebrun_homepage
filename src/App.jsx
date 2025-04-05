@@ -158,6 +158,7 @@ function App() {
 
       <Box sx={{ mt: 16 }}>
         <Routes>
+          <Route index element={<Home />} /> {/* ✅ 추가 */}
           <Route path="/" element={<Home />} />
           <Route path="/portfolio/:id" element={<PortfolioDetail />} />
           <Route path="/about" element={<AboutPage />} />
