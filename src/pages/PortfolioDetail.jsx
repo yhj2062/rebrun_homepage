@@ -18,14 +18,14 @@ function PortfolioDetail() {
   useEffect(() => {
     const loadImages = async () => {
       try {
-        // portfolio_data.json 파일을 불러옴
         const res = await fetch(`${import.meta.env.BASE_URL}portfolio/portfolio_data.json`);
         const data = await res.json();
-        // id 값과 일치하는 포트폴리오 항목을 찾음
         const portfolioItem = data.find(item => item.id === id);
         if (portfolioItem) {
-          const folderPath = `${import.meta.env.BASE_URL}portfolio/${portfolioItem.folder}/`;
-          // thumb 관련 파일은 제외한 나머지 파일들의 URL을 생성
+          // import.meta.env.BASE_URL가 절대경로(앞에 '/')가 되도록 보장합니다.
+          const baseUrl = import.meta.env.BASE_URL;
+          const normalizedBaseUrl = baseUrl.startsWith('/') ? baseUrl : '/' + baseUrl;
+          const folderPath = `${normalizedBaseUrl}portfolio/${portfolioItem.folder}/`;
           const imageUrls = portfolioItem.images
             .filter(name => {
               const lower = name.toLowerCase();
