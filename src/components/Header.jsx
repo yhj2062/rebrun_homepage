@@ -23,6 +23,7 @@ const menuItems = [
   { label: "예약문의(실시간 상담)", path: "https://open.kakao.com/o/sdjw3eWe", external: true },
   { label: "장소별 포트폴리오", path: "/" },
   { label: "금액안내", path: "/pricing" },
+  { label: "할인혜택", path: "/discount" }, 
 ];
 
 function Header() {
