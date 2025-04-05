@@ -16,15 +16,27 @@ import {
     const [images, setImages] = useState([]);
   
     useEffect(() => {
-      fetch(`${import.meta.env.BASE_URL}portfolio/portfolio_data.json`)
-        .then(res => res.json())
-        .then(data => {
-          setPortfolioList(data);
-          if (data.length > 0) {
-            setSelectedPlace(data[0].place);
-          }
-        });
-    }, []);
+      const loadImages = async () => {
+        const folderPath = `${import.meta.env.BASE_URL}portfolio/${id}/`;
+        const imageList = [];
+    
+        // 보정본은 thumb 제외한 jpg 파일로 구성되어 있다고 가정
+        for (let i = 1; i <= 99; i++) {
+          const fileName = `${i.toString().padStart(3, '0')}.jpg`;
+          const url = `${folderPath}${fileName}`;
+    
+          // 실제로 존재하는 이미지인지 fetch로 체크
+          try {
+            const res = await fetch(url, { method: "HEAD" });
+            if (res.ok) imageList.push(url);
+          } catch (_) {}
+        }
+    
+        setImages(imageList);
+      };
+    
+      loadImages();
+    }, [id]);
   
     return (
       <Box sx={{ bgcolor: "#121212", minHeight: "100dvh", py: 4 }}>
