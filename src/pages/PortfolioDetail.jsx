@@ -18,20 +18,17 @@ function PortfolioDetail() {
   useEffect(() => {
     const loadImages = async () => {
       try {
+        // portfolio_data.json 파일 불러오기
         const res = await fetch(`${import.meta.env.BASE_URL}portfolio/portfolio_data.json`);
         const data = await res.json();
+        // 현재 id와 일치하는 항목 찾기
         const portfolioItem = data.find(item => item.id === id);
         if (portfolioItem) {
-          // import.meta.env.BASE_URL가 절대경로(앞에 '/')가 되도록 보장합니다.
-          const baseUrl = import.meta.env.BASE_URL;
-          const normalizedBaseUrl = baseUrl.startsWith('/') ? baseUrl : '/' + baseUrl;
-          const folderPath = `${normalizedBaseUrl}portfolio/${portfolioItem.folder}/`;
-          const imageUrls = portfolioItem.images
-            .filter(name => {
-              const lower = name.toLowerCase();
-              return lower !== "thumb.jpg" && lower !== "thunb.jpg";
-            })
-            .map(name => folderPath + name);
+          // JSON에 정의된 이미지 URL을 그대로 사용 (thumb 관련 항목은 제외)
+          const imageUrls = portfolioItem.images.filter(name => {
+            const lower = name.toLowerCase();
+            return lower !== "thumb.jpg" && lower !== "thunb.jpg";
+          });
           setImages(imageUrls);
         }
       } catch (error) {
