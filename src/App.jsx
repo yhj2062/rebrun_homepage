@@ -3,6 +3,7 @@
 import { Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import PortfolioDetail from "./pages/PortfolioDetail";
+import Header from "./components/Header";
 import {
   AppBar,
   Toolbar,
@@ -139,36 +140,8 @@ function App() {
 
   return (
     <>
-      <AppBar position="fixed" sx={{ backgroundColor: "#111", boxShadow: "none", borderBottom: "1px solid #444" }}>
-        <Toolbar sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 1, py: 2 }}>
-          <Typography
-            variant="h3"
-            sx={{
-              color: "#fff",
-              fontFamily: "'Playfair Display', serif",
-              borderBottom: "2px solid #888",
-              pb: 1,
-              mb: 1
-            }}
-          >
-            르브랑 갤러리
-          </Typography>
-          <Box sx={{ display: "flex", gap: 3 }}>
-            <Button component={Link} to="/about" sx={{ color: "#fff", textTransform: "none" }}>
-              About
-            </Button>
-            <Button href="https://open.kakao.com/o/sdjw3eWe" target="_blank" rel="noopener noreferrer" sx={{ color: "#fff", textTransform: "none" }}>
-              예약문의(실시간 상담)
-            </Button>
-            <Button component={Link} to="/" sx={{ color: "#fff", textTransform: "none" }}>
-              장소별 포트폴리오
-            </Button>
-            <Button component={Link} to="/pricing" sx={{ color: "#fff", textTransform: "none" }}>
-              금액안내
-            </Button>
-          </Box>
-        </Toolbar>
-      </AppBar>
+      <Header />
+
 
       {/* 네비게이터 아래 전체 배경 영역 */}
       <Box sx={{ mt: 16, bgcolor: "#121212" }}>
