@@ -1,16 +1,28 @@
 // src/App.jsx
 
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import PortfolioDetail from "./pages/PortfolioDetail";
-import { AppBar, Toolbar, Button, Box, Typography, Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
+import {
+  AppBar,
+  Toolbar,
+  Button,
+  Box,
+  Typography,
+  Container,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper
+} from "@mui/material";
 
 function App() {
   const AboutPage = () => (
     <Box sx={{ bgcolor: "#121212", minHeight: "100vh", py: 8 }}>
       <Container maxWidth="md" sx={{ color: "#fff", fontFamily: "'Noto Serif KR', serif" }}>
-        
-
         <Typography variant="h5" gutterBottom>
           순간을 작품으로, 감성을 기록합니다
         </Typography>
@@ -48,9 +60,6 @@ function App() {
   const PricingPage = () => (
     <Box sx={{ bgcolor: "#121212", minHeight: "100vh", py: 8 }}>
       <Container maxWidth="md" sx={{ color: "#fff", fontFamily: "'Noto Serif KR', serif" }}>
-        
-
-        
         <TableContainer component={Paper} sx={{ mb: 4, backgroundColor: '#1e1e1e' }}>
           <Table>
             <TableHead>
@@ -126,7 +135,7 @@ function App() {
   );
 
   return (
-    <Router>
+    <>
       <AppBar position="fixed" sx={{ backgroundColor: "#111", boxShadow: "none", borderBottom: "1px solid #444" }}>
         <Toolbar sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 1, py: 2 }}>
           <Typography
@@ -158,13 +167,14 @@ function App() {
 
       <Box sx={{ mt: 16 }}>
         <Routes>
+          <Route index element={<Home />} />
           <Route path="/" element={<Home />} />
           <Route path="/portfolio/:id" element={<PortfolioDetail />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/pricing" element={<PricingPage />} />
         </Routes>
       </Box>
-    </Router>
+    </>
   );
 }
 
