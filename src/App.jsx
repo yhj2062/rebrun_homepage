@@ -93,6 +93,7 @@ function App() {
           </Typography>
           <Typography paragraph>
             저희에게 아직 등록되지 않은 장소에서 촬영을 의뢰하시면, <strong>30,000원 할인 혜택</strong>을 드립니다.<br/>
+            이벤트 참여 가능한 지점인지에 대한 확인은 문의주세요^^<br/>
             ※ 촬영된 사진은 홈페이지 내 포트폴리오로 사용됩니다.
           </Typography>
   
@@ -100,9 +101,9 @@ function App() {
             - 후기 작성 리워드
           </Typography>
           <Typography paragraph>
-            촬영 후 맘스홀릭, 파티수카페 2곳에 촬영 후기를 작성해주시면, <strong>5,000원 환급</strong>을 해드립니다.<br/>
+            촬영 후 인스타(필수 해시태그 2개 - #촬영한 지점명, #르브랑갤러리), 파티수카페 2곳에 촬영 후기를 작성해주시면, <strong>5,000원 환급</strong>을 해드립니다.<br/>
             후기 작성후 아래 오픈채팅방 통해 링크와 계좌번호를 남겨주시면 됩니다.<br/>
-            ※ 동일한 내용을 여러 커뮤니티에 올리셔도 무방합니다.
+            ※ 내용은 동일해도 무방합니다.
           </Typography>
   
           <Typography paragraph sx={{ mt: 5 }}>

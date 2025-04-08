@@ -23,6 +23,10 @@
   }
 }</code></pre>
 
+
+포트폴리오 생성 명령어 : npm run generate:portfolio
+
+
 <h3>✅ 4. Vite 설정 (<code>vite.config.js</code>)</h3>
 
 <pre><code>export default defineConfig({
