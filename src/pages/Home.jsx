@@ -8,6 +8,10 @@ function Home() {
   const [portfolioList, setPortfolioList] = useState([]);
   const [selectedPlace, setSelectedPlace] = useState("");
 
+  const scrollToPortfolio = () => {
+    document.getElementById("portfolio")?.scrollIntoView({ behavior: "smooth" });
+  };
+
   useEffect(() => {
     fetch(`${import.meta.env.BASE_URL}portfolio/portfolio_data.json`)
       .then((res) => res.json())
@@ -82,8 +86,8 @@ function Home() {
           </Typography>
           <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1.5 }}>
             <Button
-              component="a"
-              href="#portfolio"
+              type="button"
+              onClick={scrollToPortfolio}
               sx={{
                 bgcolor: "#27231f",
                 borderRadius: 0,
