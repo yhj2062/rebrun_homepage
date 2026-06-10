@@ -7,6 +7,8 @@ const contactUrl = "https://open.kakao.com/o/sdjw3eWe";
 function Home() {
   const [portfolioList, setPortfolioList] = useState([]);
   const [selectedPlace, setSelectedPlace] = useState("");
+  const [visiblePlace, setVisiblePlace] = useState("");
+  const [isGalleryVisible, setIsGalleryVisible] = useState(true);
 
   const scrollToPortfolio = () => {
     document.getElementById("portfolio")?.scrollIntoView({ behavior: "smooth" });
@@ -19,6 +21,7 @@ function Home() {
         setPortfolioList(data);
         if (data.length > 0) {
           setSelectedPlace(data[0].place);
+          setVisiblePlace(data[0].place);
         }
       });
   }, []);
@@ -44,8 +47,23 @@ function Home() {
     return () => window.clearInterval(intervalId);
   }, [uniquePlaces]);
 
-  const filteredList = selectedPlace
-    ? portfolioList.filter((item) => item.place === selectedPlace)
+  useEffect(() => {
+    if (!selectedPlace || selectedPlace === visiblePlace) {
+      return undefined;
+    }
+
+    setIsGalleryVisible(false);
+
+    const timeoutId = window.setTimeout(() => {
+      setVisiblePlace(selectedPlace);
+      setIsGalleryVisible(true);
+    }, 260);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [selectedPlace, visiblePlace]);
+
+  const filteredList = visiblePlace
+    ? portfolioList.filter((item) => item.place === visiblePlace)
     : portfolioList;
 
   const heroItem = portfolioList[0];
@@ -196,7 +214,10 @@ function Home() {
           sx={{
             display: "grid",
             gridTemplateColumns: { xs: "1fr", sm: "repeat(2, minmax(0, 1fr))", lg: "repeat(3, minmax(0, 1fr))" },
-            gap: { xs: 3.5, md: 5 }
+            gap: { xs: 3.5, md: 5 },
+            opacity: isGalleryVisible ? 1 : 0,
+            transform: isGalleryVisible ? "translateY(0)" : "translateY(14px)",
+            transition: "opacity 420ms ease, transform 420ms ease"
           }}
         >
           {filteredList.map((item) => (
