@@ -11,7 +11,7 @@
     "preview": "vite preview",
     "generate:portfolio": "node scripts/generatePortfolioList.js",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist -b gh-pages -r https://github.com/yhj2062/rebrun_homepage.git"
+    "deploy": "gh-pages -d docs -b gh-pages -r https://github.com/yhj2062/rebrun_homepage.git"
 
   },
   "dependencies": {

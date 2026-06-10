@@ -1,167 +1,163 @@
-// src/components/Header.jsx
-
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   AppBar,
-  Toolbar,
-  Typography,
-  IconButton,
+  Box,
+  Button,
   Drawer,
+  IconButton,
   List,
   ListItem,
-  ListItemText,
-  Button,
-  Box
+  Toolbar,
+  Typography
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { useTheme } from "@mui/material/styles";
+import CloseIcon from "@mui/icons-material/Close";
 import { Link } from "react-router-dom";
 
 const menuItems = [
+  { label: "Portfolio", path: "/" },
   { label: "About", path: "/about" },
-  { label: "예약문의(실시간 상담)", path: "https://open.kakao.com/o/sdjw3eWe", external: true },
-  { label: "장소별 포트폴리오", path: "/" },
-  { label: "금액안내", path: "/pricing" },
-  { label: "할인혜택", path: "/discount" }, 
+  { label: "Pricing", path: "/pricing" },
+  { label: "Benefit", path: "/discount" },
+  { label: "예약문의", path: "https://open.kakao.com/o/sdjw3eWe", external: true }
 ];
 
+const navButtonSx = {
+  color: "#27231f",
+  fontFamily: "'Noto Serif KR', serif",
+  fontSize: "0.82rem",
+  fontWeight: 500,
+  letterSpacing: 0,
+  minWidth: "auto",
+  px: 0,
+  py: 0.5,
+  textTransform: "none",
+  "&:hover": {
+    backgroundColor: "transparent",
+    color: "#8b6f52"
+  }
+};
+
 function Header() {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [drawerOpen, setDrawerOpen] = useState(false);
 
-  const toggleDrawer = (open) => () => {
-    setDrawerOpen(open);
-  };
+  const closeDrawer = () => setDrawerOpen(false);
 
   return (
     <>
-      <AppBar 
-        position="fixed" 
-        sx={{ backgroundColor: "#111", boxShadow: "none", borderBottom: "1px solid #444" }}
+      <AppBar
+        position="fixed"
+        elevation={0}
+        sx={{
+          bgcolor: "rgba(250, 248, 244, 0.92)",
+          borderBottom: "1px solid rgba(39, 35, 31, 0.12)",
+          backdropFilter: "blur(16px)",
+          color: "#27231f"
+        }}
       >
         <Toolbar
           sx={{
-            display: "flex",
-            flexDirection: isMobile ? "row" : "column",
-            alignItems: "center",
-            justifyContent: isMobile ? "space-between" : "center",
-            width: "100%",
-            px: 2,
-            py: isMobile ? 1 : 2,
-            boxSizing: "border-box",
+            minHeight: { xs: 64, md: 76 },
+            justifyContent: "space-between",
+            px: { xs: 2.5, md: 6 }
           }}
         >
-          {/* 로고 */}
           <Typography
-            variant={isMobile ? "h6" : "h3"}
+            component={Link}
+            to="/"
             sx={{
-              color: "#fff",
-              fontFamily: "'Playfair Display', serif",
-              borderBottom: isMobile ? "none" : "2px solid #888",
-              pb: isMobile ? 0 : 1,
-              mb: isMobile ? 0 : 1,
+              color: "inherit",
+              fontFamily: "'Nanum Myeongjo', serif",
+              fontSize: { xs: "1.1rem", md: "1.45rem" },
+              fontWeight: 700,
+              textDecoration: "none"
             }}
           >
             르브랑 갤러리
           </Typography>
 
-          {/* 햄버거 아이콘 (모바일에서만) */}
-          {isMobile && (
-            <IconButton onClick={toggleDrawer(true)} sx={{ color: "#fff" }}>
-              <MenuIcon />
-            </IconButton>
-          )}
+          <Box sx={{ display: { xs: "none", md: "flex" }, gap: 3.5, alignItems: "center" }}>
+            {menuItems.map((item) =>
+              item.external ? (
+                <Button
+                  key={item.label}
+                  href={item.path}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  sx={{
+                    ...navButtonSx,
+                    border: "1px solid rgba(39, 35, 31, 0.28)",
+                    borderRadius: 0,
+                    px: 2,
+                    py: 0.7
+                  }}
+                >
+                  {item.label}
+                </Button>
+              ) : (
+                <Button key={item.label} component={Link} to={item.path} sx={navButtonSx}>
+                  {item.label}
+                </Button>
+              )
+            )}
+          </Box>
 
-          {/* 데스크탑 메뉴 */}
-          {!isMobile && (
-            <Box sx={{ display: "flex", gap: 3 }}>
-              {menuItems.map((item) =>
-                item.external ? (
-                  <Button
-                    key={item.label}
-                    href={item.path}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    sx={{ color: "#fff", textTransform: "none" }}
-                  >
-                    {item.label}
-                  </Button>
-                ) : (
-                  <Button
-                    key={item.label}
-                    component={Link}
-                    to={item.path}
-                    sx={{ color: "#fff", textTransform: "none" }}
-                  >
-                    {item.label}
-                  </Button>
-                )
-              )}
-            </Box>
-          )}
+          <IconButton
+            onClick={() => setDrawerOpen(true)}
+            sx={{ display: { xs: "inline-flex", md: "none" }, color: "inherit" }}
+            aria-label="메뉴 열기"
+          >
+            <MenuIcon />
+          </IconButton>
         </Toolbar>
       </AppBar>
 
-      {/* 모바일 Drawer 메뉴 (오른쪽에서 슬라이드) */}
       <Drawer
         anchor="right"
         open={drawerOpen}
-        onClose={toggleDrawer(false)}
+        onClose={closeDrawer}
         PaperProps={{
           sx: {
-            backgroundColor: "#111", // AppBar와 같은 어두운 배경색
-            color: "#fff",
-            width: 250,
-          },
+            bgcolor: "#faf8f4",
+            color: "#27231f",
+            width: "min(82vw, 320px)"
+          }
         }}
       >
-        <Box
-          sx={{ width: 250 }}
-          role="presentation"
-          onClick={toggleDrawer(false)}
-          onKeyDown={toggleDrawer(false)}
-        >
-          <List>
+        <Box sx={{ px: 3, py: 2.5 }}>
+          <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 4 }}>
+            <Typography sx={{ fontFamily: "'Nanum Myeongjo', serif", fontWeight: 700 }}>
+              르브랑 갤러리
+            </Typography>
+            <IconButton onClick={closeDrawer} aria-label="메뉴 닫기">
+              <CloseIcon />
+            </IconButton>
+          </Box>
+
+          <List disablePadding>
             {menuItems.map((item) => (
-              <ListItem button key={item.label}>
+              <ListItem key={item.label} disablePadding sx={{ borderTop: "1px solid #e4ded5" }}>
                 {item.external ? (
-                  <ListItemText
-                    primary={
-                      <a
-                        href={item.path}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{
-                          textDecoration: "none",
-                          color: "inherit",
-                          fontSize: "1.1rem",
-                          padding: "0.5rem 0",
-                          display: "block",
-                        }}
-                      >
-                        {item.label}
-                      </a>
-                    }
-                  />
+                  <Button
+                    fullWidth
+                    href={item.path}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={closeDrawer}
+                    sx={{ ...navButtonSx, justifyContent: "flex-start", py: 2 }}
+                  >
+                    {item.label}
+                  </Button>
                 ) : (
-                  <ListItemText
-                    primary={
-                      <Link
-                        to={item.path}
-                        style={{
-                          textDecoration: "none",
-                          color: "inherit",
-                          fontSize: "1.1rem",
-                          padding: "0.5rem 0",
-                          display: "block",
-                        }}
-                      >
-                        {item.label}
-                      </Link>
-                    }
-                  />
+                  <Button
+                    fullWidth
+                    component={Link}
+                    to={item.path}
+                    onClick={closeDrawer}
+                    sx={{ ...navButtonSx, justifyContent: "flex-start", py: 2 }}
+                  >
+                    {item.label}
+                  </Button>
                 )}
               </ListItem>
             ))}
