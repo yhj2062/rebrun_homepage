@@ -28,6 +28,22 @@ function Home() {
     [portfolioList]
   );
 
+  useEffect(() => {
+    if (uniquePlaces.length < 2) {
+      return undefined;
+    }
+
+    const intervalId = window.setInterval(() => {
+      setSelectedPlace((currentPlace) => {
+        const currentIndex = uniquePlaces.indexOf(currentPlace);
+        const nextIndex = currentIndex === -1 ? 0 : (currentIndex + 1) % uniquePlaces.length;
+        return uniquePlaces[nextIndex];
+      });
+    }, 2000);
+
+    return () => window.clearInterval(intervalId);
+  }, [uniquePlaces]);
+
   const filteredList = selectedPlace
     ? portfolioList.filter((item) => item.place === selectedPlace)
     : portfolioList;
