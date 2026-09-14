@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yhj2062.github.io/rebrun_homepage/sitemap.xml
